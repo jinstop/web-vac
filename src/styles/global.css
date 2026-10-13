@@ -1226,6 +1226,13 @@ ul {
   font-size: 0.82rem;
 }
 
+.footer-version {
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
 /* ============ 404 ============ */
 .notfound {
   text-align: center;
