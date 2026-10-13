@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Inquiry Received';
+---
+
+<Base title={title} description="Thank you for your inquiry. Our sales team will respond within one business day.">
+  <section class="notfound">
+    <div class="container">
+      <div class="notfound__code" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="72" height="72" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="28" /><path d="M20 33l8 8 16-17" /></svg>
+      </div>
+      <h1>Inquiry Received</h1>
+      <p>Thank you for contacting us. Our sales team will get back to you within one business day.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/">Back to Home</a>
+        <a class="btn btn--ghost" href="/products">Browse Products</a>
+      </div>
+    </div>
+  </section>
+</Base>

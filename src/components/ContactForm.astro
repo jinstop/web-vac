@@ -1,6 +1,8 @@
 ---
 import { site } from '../config/site';
 import { categories } from '../data/products';
+
+const formsubmitEndpoint = 'https://formsubmit.co/ljstree21@gmail.com';
 ---
 
 <section class="section">
@@ -11,7 +13,12 @@ import { categories } from '../data/products';
         Tell us your parts, load size, and cycle requirements — our engineering team will
         propose a furnace configuration and quotation.
       </p>
-      <form id="inquiry-form">
+      <form id="inquiry-form" action={formsubmitEndpoint} method="POST">
+        <input type="hidden" name="_subject" value="New Furnace Inquiry - Qov Website" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value={`${site.domain}/thank-you`} />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
         <div class="form-grid">
           <div class="form-field">
             <label for="name">Name *</label>
@@ -50,16 +57,10 @@ import { categories } from '../data/products';
           <button class="btn btn--primary btn--lg" type="submit">Send Inquiry</button>
         </div>
         <p class="form-note">
-          Note: submitting opens your email client with the details pre-filled.
-          You can also write to us directly at <a href={`mailto:${site.email}`}>{site.email}</a>.
+          Submitting sends your details to our sales team — typical response within
+          one business day.
         </p>
       </form>
-      <noscript>
-        <p class="form-note">
-          JavaScript is disabled — please email us directly at
-          <a href={`mailto:${site.email}`}>{site.email}</a>.
-        </p>
-      </noscript>
     </div>
 
     <aside class="contact-aside">
@@ -96,21 +97,3 @@ import { categories } from '../data/products';
     </aside>
   </div>
 </section>
-
-<script>
-  import { site } from '../config/site';
-
-  const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
-
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const product = String(data.get('Product') || 'General Inquiry');
-    const subject = `Furnace Inquiry - ${product}`;
-    const body = Array.from(data.entries())
-      .map(([key, value]) => `${key}: ${String(value).trim()}`)
-      .join('\r\n');
-    const url = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = url;
-  });
-</script>
