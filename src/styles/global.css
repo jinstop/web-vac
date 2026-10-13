@@ -775,6 +775,29 @@ ul {
   max-width: 760px;
 }
 
+.page-hero__inner--with-img {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 44px;
+  align-items: center;
+}
+
+.page-hero__img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: var(--shadow-lg);
+  background: var(--paper);
+}
+
+@media (max-width: 900px) {
+  .page-hero__inner--with-img {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
 .prose p {
   margin-bottom: 16px;
   color: var(--text);

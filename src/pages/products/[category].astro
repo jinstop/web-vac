@@ -6,6 +6,7 @@ import FurnaceIcon from '../../components/FurnaceIcon.astro';
 import Icon from '../../components/Icon.astro';
 import { site } from '../../config/site';
 import { categories, specNote } from '../../data/products';
+import type { ImageMetadata } from 'astro';
 
 export function getStaticPaths() {
   return categories.map((category) => ({
@@ -21,27 +22,48 @@ const description = `${category.heroSummary} Engineered to order, delivered worl
 const index = categories.findIndex((c) => c.slug === category.slug);
 const prev = index > 0 ? categories[index - 1] : null;
 const next = index < categories.length - 1 ? categories[index + 1] : null;
+
+const productImages = import.meta.glob<{ default: ImageMetadata }>('../../assets/products/*.webp', { eager: true });
+const heroImage = productImages[`../../assets/products/${category.slug}.webp`]?.default;
+const heroAlts: Record<string, string> = {
+  'vacuum-quenching-furnace': 'Vacuum quenching furnace in the production shop',
+  'vacuum-brazing-furnace': 'High-temperature vacuum brazing furnace with hot zone in operation'
+};
 ---
 
 <Base title={title} description={description}>
   <section class="page-hero">
-    <div class="container">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
-        <span class="breadcrumb__sep">/</span>
-        <a href="/products">Products</a>
-        <span class="breadcrumb__sep">/</span>
-        <span>{category.title}</span>
-      </nav>
-      <div style="display:flex;align-items:center;gap:16px">
-        <span style="width:56px;height:56px;flex:none;border-radius:8px;background:linear-gradient(150deg,var(--primary-700),var(--primary-500));color:#fff;display:grid;place-items:center">
-          <span style="width:32px;height:32px;display:block">
-            <FurnaceIcon name={category.icon} />
+    <div class={`container page-hero__inner${heroImage ? ' page-hero__inner--with-img' : ''}`}>
+      <div>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span class="breadcrumb__sep">/</span>
+          <a href="/products">Products</a>
+          <span class="breadcrumb__sep">/</span>
+          <span>{category.title}</span>
+        </nav>
+        <div style="display:flex;align-items:center;gap:16px">
+          <span style="width:56px;height:56px;flex:none;border-radius:8px;background:linear-gradient(150deg,var(--primary-700),var(--primary-500));color:#fff;display:grid;place-items:center">
+            <span style="width:32px;height:32px;display:block">
+              <FurnaceIcon name={category.icon} />
+            </span>
           </span>
-        </span>
-        <h1>{category.title}</h1>
+          <h1>{category.title}</h1>
+        </div>
+        <p class="page-hero__sub">{category.heroSummary}</p>
       </div>
-      <p class="page-hero__sub">{category.heroSummary}</p>
+      {
+        heroImage && (
+          <img
+            class="page-hero__img"
+            src={heroImage.src}
+            alt={heroAlts[category.slug] ?? category.title}
+            width="900"
+            height="600"
+            loading="eager"
+          />
+        )
+      }
     </div>
   </section>
 

@@ -17,3 +17,6 @@ SKILL.md
 
 # 工作区数据（WorkBuddy 本地记忆）
 .workbuddy/
+
+# user raw image staging dir
+图片/
