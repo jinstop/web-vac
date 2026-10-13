@@ -1,6 +1,6 @@
 export const site = {
   name: 'Qov',
-  version: 'V1.3.02',
+  version: 'V1.3.03',
   tagline: 'Vacuum Furnace Manufacturer',
   domain: 'https://vac.mokc.top',
   slogan: 'Precision Vacuum Thermal Processing Solutions',
