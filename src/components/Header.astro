@@ -19,11 +19,10 @@ const productLinks = categories.map((c) => ({
       </svg>
       <span>
         <span class="brand__name">{site.name}</span>
-        <span class="brand__sub">{site.nameEn}</span>
+        <span class="brand__sub">{site.tagline}</span>
       </span>
     </a>
 
-    <!-- 桌面导航 -->
     <nav aria-label="Main navigation">
       <ul class="main-nav desktop-nav">
         {
@@ -57,7 +56,6 @@ const productLinks = categories.map((c) => ({
 
     <a class="btn btn--primary header-cta" href="/contact">Request a Quote</a>
 
-    <!-- 移动端菜单（无 JS，details/summary 实现） -->
     <details class="menu-toggle">
       <summary class="menu-toggle__summary" aria-label="Open menu">
         <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">

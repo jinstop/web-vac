@@ -15,7 +15,7 @@ export function getStaticPaths() {
 }
 
 const { category } = Astro.props;
-const title = `${category.title} | ${site.nameEn}`;
+const title = `${category.title} | ${site.name}`;
 const description = `${category.heroSummary} Engineered to order, delivered worldwide.`;
 
 const index = categories.findIndex((c) => c.slug === category.slug);
@@ -45,7 +45,6 @@ const next = index < categories.length - 1 ? categories[index + 1] : null;
     </div>
   </section>
 
-  <!-- 技术概述 -->
   <section class="section">
     <div class="container about-block prose">
       <span class="eyebrow">Overview</span>
@@ -54,7 +53,6 @@ const next = index < categories.length - 1 ? categories[index + 1] : null;
     </div>
   </section>
 
-  <!-- 型号与规格 -->
   <section class="section section--paper50">
     <div class="container">
       <div class="section-head">
@@ -71,7 +69,6 @@ const next = index < categories.length - 1 ? categories[index + 1] : null;
     </div>
   </section>
 
-  <!-- 技术特点 -->
   <section class="section">
     <div class="container">
       <div class="section-head">
@@ -91,7 +88,6 @@ const next = index < categories.length - 1 ? categories[index + 1] : null;
     </div>
   </section>
 
-  <!-- 应用 -->
   <section class="section section--paper50">
     <div class="container">
       <div class="section-head">
@@ -104,7 +100,6 @@ const next = index < categories.length - 1 ? categories[index + 1] : null;
     </div>
   </section>
 
-  <!-- 相邻分类 -->
   <section class="section section--tight">
     <div class="container pager">
       {
