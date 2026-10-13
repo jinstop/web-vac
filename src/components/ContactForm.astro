@@ -11,27 +11,27 @@ import { categories } from '../data/products';
         Tell us your parts, load size, and cycle requirements — our engineering team will
         propose a furnace configuration and quotation.
       </p>
-      <form action={`mailto:${site.email}`} method="post" enctype="text/plain">
+      <form id="inquiry-form">
         <div class="form-grid">
           <div class="form-field">
             <label for="name">Name *</label>
-            <input id="name" name="name" type="text" required autocomplete="name" />
+            <input id="name" name="Name" type="text" required autocomplete="name" />
           </div>
           <div class="form-field">
             <label for="company">Company</label>
-            <input id="company" name="company" type="text" autocomplete="organization" />
+            <input id="company" name="Company" type="text" autocomplete="organization" />
           </div>
           <div class="form-field">
             <label for="email">Email *</label>
-            <input id="email" name="email" type="email" required autocomplete="email" />
+            <input id="email" name="Email" type="email" required autocomplete="email" />
           </div>
           <div class="form-field">
             <label for="country">Country / Region</label>
-            <input id="country" name="country" type="text" autocomplete="country-name" />
+            <input id="country" name="Country" type="text" autocomplete="country-name" />
           </div>
           <div class="form-field form-field--full">
             <label for="product">Product of Interest</label>
-            <select id="product" name="product">
+            <select id="product" name="Product">
               <option value="">Select a furnace type</option>
               {
                 categories.map((c) => (
@@ -43,17 +43,23 @@ import { categories } from '../data/products';
           </div>
           <div class="form-field form-field--full">
             <label for="message">Requirements *</label>
-            <textarea id="message" name="message" required placeholder="Part material & dimensions, batch weight, required temperature / vacuum level, cycle time, site constraints…"></textarea>
+            <textarea id="message" name="Requirements" required placeholder="Part material & dimensions, batch weight, required temperature / vacuum level, cycle time, site constraints…"></textarea>
           </div>
         </div>
         <div class="btn-row" style="margin-top:22px">
           <button class="btn btn--primary btn--lg" type="submit">Send Inquiry</button>
         </div>
         <p class="form-note">
-          Note: this static form opens your email client with the details pre-filled.
+          Note: submitting opens your email client with the details pre-filled.
           You can also write to us directly at <a href={`mailto:${site.email}`}>{site.email}</a>.
         </p>
       </form>
+      <noscript>
+        <p class="form-note">
+          JavaScript is disabled — please email us directly at
+          <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+      </noscript>
     </div>
 
     <aside class="contact-aside">
@@ -90,3 +96,21 @@ import { categories } from '../data/products';
     </aside>
   </div>
 </section>
+
+<script>
+  import { site } from '../config/site';
+
+  const form = document.getElementById('inquiry-form') as HTMLFormElement | null;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const product = String(data.get('Product') || 'General Inquiry');
+    const subject = `Furnace Inquiry - ${product}`;
+    const body = Array.from(data.entries())
+      .map(([key, value]) => `${key}: ${String(value).trim()}`)
+      .join('\r\n');
+    const url = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = url;
+  });
+</script>
