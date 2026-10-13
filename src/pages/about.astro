@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import CTASection from '../components/CTASection.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+
+const title = `About Us | ${site.nameEn}`;
+const description =
+  'China-based manufacturer of industrial vacuum heat treatment furnaces — engineering, in-house manufacturing, global delivery and lifecycle support for tool & die, aerospace and automotive manufacturers.';
+
+const capabilities = [
+  'Vacuum quenching, annealing, tempering, sintering, brazing and carburizing / nitriding furnace lines',
+  'Hot zones from laboratory scale to full production chambers, with graphite, tungsten or molybdenum heating systems',
+  'Vacuum systems from roughing pumps to diffusion and turbomolecular packages at 10⁻⁴ Pa class',
+  'High-pressure gas cooling circuits (N₂ / He / Ar / H₂) and vacuum-isolated oil quenching',
+  'PLC + HMI control with recipe management, data logging and export',
+  'Automated charging systems and integration with existing production lines'
+];
+
+const commitments = [
+  {
+    title: 'Specified, Not Standard',
+    text: 'Hot zone geometry, pumping capacity and cooling performance are dimensioned around your parts and cycle — so the furnace you receive is the one your process actually needs.'
+  },
+  {
+    title: 'Verified Before Shipment',
+    text: 'Every furnace passes documented temperature-uniformity and vacuum performance testing in our works before it is packed for export.'
+  },
+  {
+    title: 'Supported for the Life of the Furnace',
+    text: 'Installation supervision, commissioning, operator training, spare parts and remote diagnostics — a furnace is a decade-long relationship, not a one-time sale.'
+  }
+];
+---
+
+<Base title={title} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>About</span>
+      </nav>
+      <h1>About Us</h1>
+      <p class="page-hero__sub">
+        We design and build industrial vacuum heat treatment furnaces for manufacturers who
+        treat furnace performance as a quality parameter — not a utility.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-block">
+      <span class="eyebrow">Company Profile</span>
+      <h2>A Furnace Manufacturer Focused on Process Results</h2>
+      <p>
+        Our business is vacuum thermal processing equipment. We manufacture the full range of
+        vacuum heat treatment furnaces — quenching, annealing, tempering, sintering, brazing
+        and carburizing / nitriding — for tool &amp; die shops, aerospace and automotive
+        suppliers, medical device manufacturers and precision engineering plants around the
+        world.
+      </p>
+      <p>
+        Heat treatment fails quietly: a load that is 15 °C off spec, or a vacuum that leaks
+        past the pressure-rise limit, produces parts that look fine and fail in service. Our
+        engineering starts from that reality. Hot zone geometry, heating element layout,
+        pumping capacity and cooling circuits are specified against your parts, load weight
+        and cycle time — and verified by measurement before the furnace leaves our works.
+      </p>
+      <p>
+        We combine in-house manufacturing with export experience: every furnace is built,
+        assembled and tested under one roof, packed for international shipping, and
+        commissioned on your site by our engineers. Whether you run a single furnace or an
+        automated multi-chamber line, the specification, documentation and support come from
+        the same team.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--paper50">
+    <div class="container about-block">
+      <span class="eyebrow">Capabilities</span>
+      <h2>What We Build</h2>
+      <ul class="value-list">
+        {
+          capabilities.map((c) => (
+            <li>
+              <Icon name="check" />
+              <span style="font-size:0.97rem;font-weight:600">{c}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about-block">
+      <span class="eyebrow">Our Commitments</span>
+      <h2>How We Work</h2>
+      <div class="grid-3" style="margin-top:28px">
+        {
+          commitments.map((c) => (
+            <div class="feature">
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <CTASection
+        title="Let's Engineer Your Next Furnace"
+        text="Tell us about your parts and process — we will come back with a configuration and a quotation."
+      />
+    </div>
+  </section>
+</Base>

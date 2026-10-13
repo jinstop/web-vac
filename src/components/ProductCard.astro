@@ -1,0 +1,24 @@
+---
+import FurnaceIcon from './FurnaceIcon.astro';
+import type { Category } from '../data/products';
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+---
+
+<a class="cat-card" href={`/products/${category.slug}`}>
+  <span class="cat-card__icon">
+    <FurnaceIcon name={category.icon} />
+  </span>
+  <h3>{category.title}</h3>
+  <p>{category.heroSummary}</p>
+  <span class="cat-card__link">
+    Explore
+    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M4 12h16M14 6l6 6-6 6" />
+    </svg>
+  </span>
+</a>

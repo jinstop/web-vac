@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import CTASection from '../components/CTASection.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+import { categories } from '../data/products';
+
+const title = `Vacuum Heat Treatment Furnaces | ${site.nameEn}`;
+const description = site.description;
+
+const values = [
+  {
+    icon: 'wrench',
+    title: 'Engineering-Led Design',
+    text: 'Every furnace starts from your parts and cycle requirements — hot zone size, heating system, pumping package and quenching method are specified, not picked from a catalog.'
+  },
+  {
+    icon: 'factory',
+    title: 'In-House Manufacturing',
+    text: 'Design, fabrication, assembly and testing are carried out in our own works, keeping quality control and delivery schedules under one roof.'
+  },
+  {
+    icon: 'gauge',
+    title: 'Uniformity You Can Measure',
+    text: 'Multi-zone heating with independent control and documented temperature and vacuum uniformity surveys — the two parameters that decide whether a heat-treat job passes or fails.'
+  },
+  {
+    icon: 'support',
+    title: 'Lifecycle Support',
+    text: 'Installation supervision, commissioning, operator training, spare parts and remote diagnostics keep your furnace running long after the invoice.'
+  }
+];
+
+const industries = [
+  'Aerospace',
+  'Automotive',
+  'Tool & Die',
+  'Medical Devices',
+  'Power Generation',
+  'Electronics',
+  'Fasteners',
+  'Precision Machinery'
+];
+
+const steps = [
+  { title: 'Inquiry & Consultation', text: 'Share parts, materials, batch weight and target cycle. We translate that into a thermal process definition.' },
+  { title: 'Furnace Design', text: 'Hot zone, vacuum system, cooling circuit and control concept are engineered and quoted with a clear specification sheet.' },
+  { title: 'Manufacturing & QC', text: 'Fabrication and assembly in-house, with documented inspections and uniformity testing before shipment.' },
+  { title: 'Delivery & Installation', text: 'Export packing, shipping, and supervised installation and commissioning at your site.' },
+  { title: 'Training & After-Sales', text: 'Operator training, process recipes, spare-parts support and remote diagnostics for the life of the furnace.' }
+];
+---
+
+<Base title={title} description={description}>
+  <Hero />
+
+  <!-- 产品分类 -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Product Lines</span>
+        <h2 class="section-title">Six Furnace Families, One Thermal Partner</h2>
+        <p class="section-lede">
+          From hardening to sintering — every vacuum heat treatment process your shop runs,
+          covered by equipment engineered for it.
+        </p>
+      </div>
+      <div class="grid-3">
+        {categories.map((c) => <ProductCard category={c} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 为什么选择我们 -->
+  <section class="section section--paper50">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Why Work With Us</span>
+        <h2 class="section-title">Built Like Industrial Equipment, Supported Like a Partner</h2>
+      </div>
+      <div class="grid-2">
+        {
+          values.map((v) => (
+            <div class="feature">
+              <span class="feature__icon"><Icon name={v.icon} /></span>
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 服务行业 -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Industries Served</span>
+        <h2 class="section-title">Where Our Furnaces Run</h2>
+      </div>
+      <div class="industries">
+        {
+          industries.map((name) => (
+            <div class="industry-chip">
+              <Icon name="flame" />
+              {name}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 合作流程 -->
+  <section class="section section--paper50">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">How We Work</span>
+        <h2 class="section-title">From Inquiry to a Running Furnace</h2>
+      </div>
+      <div class="steps">
+        {steps.map((s) => <div class="step"><h3>{s.title}</h3><p>{s.text}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--tight">
+    <div class="container">
+      <CTASection
+        title="Ready to Specify Your Vacuum Furnace?"
+        text="Send us your parts, load size and cycle requirements — get a tailored furnace configuration and quotation."
+      />
+    </div>
+  </section>
+</Base>

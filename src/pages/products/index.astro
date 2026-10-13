@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CTASection from '../../components/CTASection.astro';
+import { site } from '../../config/site';
+import { categories, specNote } from '../../data/products';
+
+const title = `Products | ${site.nameEn}`;
+const description =
+  'Vacuum quenching (gas & oil), annealing, tempering, sintering, brazing and carburizing / nitriding furnaces — six product lines of industrial vacuum heat treatment equipment.';
+---
+
+<Base title={title} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Products</span>
+      </nav>
+      <h1>Vacuum Heat Treatment Furnaces</h1>
+      <p class="page-hero__sub">
+        Six furnace families covering the vacuum heat treatment processes of modern
+        metalworking — each engineered to your parts, load size and cycle requirements.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid-3">
+        {categories.map((c) => <ProductCard category={c} />)}
+      </div>
+      <p class="spec-note">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM10 9v5M10 6.5v.01" /></svg>
+        {specNote}
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <CTASection
+        title="Not Sure Which Furnace Fits Your Process?"
+        text="Send us your parts, materials and cycle targets — we will recommend the right configuration."
+      />
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,141 @@
+---
+import Base from '../../layouts/Base.astro';
+import SpecTable from '../../components/SpecTable.astro';
+import CTASection from '../../components/CTASection.astro';
+import FurnaceIcon from '../../components/FurnaceIcon.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../config/site';
+import { categories, specNote } from '../../data/products';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { category: category.slug },
+    props: { category }
+  }));
+}
+
+const { category } = Astro.props;
+const title = `${category.title} | ${site.nameEn}`;
+const description = `${category.heroSummary} Engineered to order, delivered worldwide.`;
+
+const index = categories.findIndex((c) => c.slug === category.slug);
+const prev = index > 0 ? categories[index - 1] : null;
+const next = index < categories.length - 1 ? categories[index + 1] : null;
+---
+
+<Base title={title} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <a href="/products">Products</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>{category.title}</span>
+      </nav>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span style="width:56px;height:56px;flex:none;border-radius:8px;background:linear-gradient(150deg,var(--primary-700),var(--primary-500));color:#fff;display:grid;place-items:center">
+          <span style="width:32px;height:32px;display:block">
+            <FurnaceIcon name={category.icon} />
+          </span>
+        </span>
+        <h1>{category.title}</h1>
+      </div>
+      <p class="page-hero__sub">{category.heroSummary}</p>
+    </div>
+  </section>
+
+  <!-- 技术概述 -->
+  <section class="section">
+    <div class="container about-block prose">
+      <span class="eyebrow">Overview</span>
+      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:16px">How the Process Works</h2>
+      {category.overview.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <!-- 型号与规格 -->
+  <section class="section section--paper50">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Configurations</span>
+        <h2 class="section-title">Furnace Models</h2>
+      </div>
+      <div class="grid-2">
+        {category.models.map((m) => <SpecTable model={m} />)}
+      </div>
+      <p class="spec-note">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM10 9v5M10 6.5v.01" /></svg>
+        {specNote}
+      </p>
+    </div>
+  </section>
+
+  <!-- 技术特点 -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Key Features</span>
+        <h2 class="section-title">Engineered Details</h2>
+      </div>
+      <ul class="check-list">
+        {
+          category.features.map((f) => (
+            <li>
+              <Icon name="check" />
+              <span>{f}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- 应用 -->
+  <section class="section section--paper50">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Applications</span>
+        <h2 class="section-title">Typical Parts &amp; Industries</h2>
+      </div>
+      <div class="app-tags">
+        {category.applications.map((a) => <span class="app-tag">{a}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- 相邻分类 -->
+  <section class="section section--tight">
+    <div class="container pager">
+      {
+        prev ? (
+          <a class="pager__item" href={`/products/${prev.slug}`}>
+            <div class="pager__label">← Previous</div>
+            <div class="pager__title">{prev.title}</div>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next ? (
+          <a class="pager__item pager__item--next" href={`/products/${next.slug}`}>
+            <div class="pager__label">Next →</div>
+            <div class="pager__title">{next.title}</div>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <CTASection
+        title={`Configure Your ${category.title.replace(/s$/, '')}`}
+        text="Send us your parts, load size and cycle requirements — we will propose a tailored configuration and quotation."
+      />
+    </div>
+  </section>
+</Base>

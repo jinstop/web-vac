@@ -1,0 +1,29 @@
+---
+import type { SubModel } from '../data/products';
+
+interface Props {
+  model: SubModel;
+}
+
+const { model } = Astro.props;
+---
+
+<div class="model-card">
+  <div class="model-card__head">
+    <h3>{model.name}</h3>
+    <p>{model.summary}</p>
+  </div>
+  <table class="spec-table">
+    <caption>Representative specifications</caption>
+    <tbody>
+      {
+        model.specs.map((spec) => (
+          <tr>
+            <th scope="row">{spec.label}</th>
+            <td>{spec.value}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,53 @@
+---
+import { site } from '../config/site';
+import { categories } from '../data/products';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="footer-brand">
+        <div class="footer-brand__name">{site.name}</div>
+        <div class="footer-brand__sub">{site.nameEn}</div>
+        <p>{site.slogan}. Vacuum quenching, annealing, tempering, sintering, brazing and carburizing furnaces — engineered to order and delivered worldwide.</p>
+      </div>
+
+      <div>
+        <h4>Products</h4>
+        <ul>
+          {
+            categories.map((c) => (
+              <li>
+                <a href={`/products/${c.slug}`}>{c.nav}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products">All Products</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>© {year} {site.name} ({site.nameEn}). All rights reserved.</span>
+      <span>Industrial Vacuum Heat Treatment Equipment</span>
+    </div>
+  </div>
+</footer>

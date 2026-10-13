@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vac.mokc.top/sitemap-index.xml

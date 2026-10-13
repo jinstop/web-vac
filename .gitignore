@@ -1,0 +1,16 @@
+# 依赖与产物
+node_modules/
+dist/
+
+# 敏感与本地配置（严禁入库）
+.env*
+.wrangler/
+account-info.md
+brand-ci.md
+site-logs/
+assets-library/
+*.log
+.DS_Store
+
+# skill 文件（如存于项目内）
+SKILL.md

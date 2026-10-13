@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site } from '../config/site';
+
+const title = `Contact | ${site.nameEn}`;
+const description =
+  'Contact our engineering team for vacuum furnace specifications, quotations, installation and after-sales support.';
+---
+
+<Base title={title} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Contact</span>
+      </nav>
+      <h1>Contact Us</h1>
+      <p class="page-hero__sub">
+        Tell us what you heat treat — parts, materials, batch weight and target cycle —
+        and our engineering team will propose the right furnace configuration.
+      </p>
+    </div>
+  </section>
+
+  <ContactForm />
+</Base>

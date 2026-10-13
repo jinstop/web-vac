@@ -1,0 +1,66 @@
+---
+import { site } from '../config/site';
+import Icon from './Icon.astro';
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div>
+      <span class="hero__eyebrow">Industrial Vacuum Furnaces</span>
+      <h1>Precision Vacuum Heat Treatment,<br />Engineered to Order</h1>
+      <p class="hero__sub">
+        {site.slogan} — vacuum quenching, annealing, tempering, sintering, brazing and
+        carburizing furnaces built for tool &amp; die, aerospace, automotive and precision
+        manufacturers worldwide.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary btn--lg" href="/products">Explore Products</a>
+        <a class="btn btn--outline btn--lg" href="/contact">Request a Quote</a>
+      </div>
+      <div class="hero__marks">
+        <span class="hero__mark"><Icon name="factory" />6 Product Lines</span>
+        <span class="hero__mark"><Icon name="wrench" />Custom Engineered</span>
+        <span class="hero__mark"><Icon name="globe" />Global Delivery</span>
+        <span class="hero__mark"><Icon name="support" />Turnkey Service</span>
+      </div>
+    </div>
+
+    <!-- 装饰性炉体线稿（纯 SVG，无外部图片依赖） -->
+    <div class="hero__art" aria-hidden="true">
+      <svg viewBox="0 0 460 400" fill="none" stroke="#8FB6D9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- 炉体 -->
+        <rect x="150" y="90" width="170" height="220" rx="8" />
+        <rect x="160" y="100" width="150" height="200" rx="5" opacity="0.55" />
+        <!-- 炉门观察窗 -->
+        <rect x="205" y="150" width="60" height="60" rx="4" />
+        <circle cx="235" cy="180" r="12" stroke="#F2620F" stroke-width="2.5" />
+        <!-- 炉门铰链与把手 -->
+        <path d="M175 150h-15M175 210h-15M295 150h15M295 210h15" />
+        <!-- 顶部热流 -->
+        <path d="M185 80c0-10 6-12 6-22M235 80c0-10 6-12 6-22M285 80c0-10 6-12 6-22" stroke="#F2620F" opacity="0.85" />
+        <!-- 真空管道 -->
+        <path d="M320 160h50v70h30M320 200h35" />
+        <!-- 真空泵 -->
+        <rect x="390" y="225" width="50" height="55" rx="6" />
+        <path d="M400 240h30M400 250h30M400 260h30" opacity="0.6" />
+        <!-- 压力表 -->
+        <circle cx="415" cy="70" r="22" />
+        <path d="M415 70l10-10" stroke="#F2620F" stroke-width="2.5" />
+        <path d="M395 62l6 6M435 62l-6 6" opacity="0.7" />
+        <path d="M405 55h20" opacity="0.7" />
+        <path d="M415 48v-14M393 48h44" opacity="0.7" />
+        <!-- 控制柜 -->
+        <rect x="60" y="150" width="70" height="160" rx="6" />
+        <rect x="72" y="164" width="46" height="40" rx="3" opacity="0.6" />
+        <path d="M76 220h38M76 232h38M76 244h26" opacity="0.6" />
+        <circle cx="82" cy="266" r="4" stroke="#F2620F" stroke-width="2.5" />
+        <circle cx="98" cy="266" r="4" />
+        <path d="M60 130h70" opacity="0.7" />
+        <!-- 底座 -->
+        <path d="M120 310h230M95 330h270" opacity="0.8" />
+        <!-- 温度刻度装饰 -->
+        <path d="M150 350v-12M170 350v-8M190 350v-12M210 350v-8M230 350v-12M250 350v-8M270 350v-12M290 350v-8" opacity="0.35" />
+      </svg>
+    </div>
+  </div>
+</section>

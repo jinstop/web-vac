@@ -1,0 +1,87 @@
+---
+import { nav, site } from '../config/site';
+import { categories } from '../data/products';
+
+const productLinks = categories.map((c) => ({
+  label: c.title,
+  href: `/products/${c.slug}`
+}));
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label={`${site.name} — home`}>
+      <svg class="brand__mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="12" fill="#10456E" />
+        <rect x="16" y="22" width="32" height="28" rx="3" fill="none" stroke="#FFFFFF" stroke-width="3.5" />
+        <rect x="27" y="33" width="10" height="10" rx="1.5" fill="#F2620F" />
+        <path d="M22 16c0-3.5 2-6 2-9M32 16c0-3.5 2-6 2-9M42 16c0-3.5 2-6 2-9" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none" />
+      </svg>
+      <span>
+        <span class="brand__name">{site.name}</span>
+        <span class="brand__sub">{site.nameEn}</span>
+      </span>
+    </a>
+
+    <!-- 桌面导航 -->
+    <nav aria-label="Main navigation">
+      <ul class="main-nav desktop-nav">
+        {
+          nav.map((item) =>
+            item.label === 'Products' ? (
+              <li>
+                <details class="nav-dropdown">
+                  <summary class="nav-summary">
+                    Products
+                    <svg class="nav-caret" viewBox="0 0 12 12" aria-hidden="true">
+                      <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                    </svg>
+                  </summary>
+                  <div class="nav-dropdown__panel">
+                    <a href="/products">All Products</a>
+                    {productLinks.map((p) => <a href={p.href}>{p.label}</a>)}
+                  </div>
+                </details>
+              </li>
+            ) : (
+              <li>
+                <a href={item.href} aria-current={Astro.url.pathname === item.href ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            )
+          )
+        }
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary header-cta" href="/contact">Request a Quote</a>
+
+    <!-- 移动端菜单（无 JS，details/summary 实现） -->
+    <details class="menu-toggle">
+      <summary class="menu-toggle__summary" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </summary>
+      <div class="menu-toggle__panel">
+        <a href="/">Home</a>
+        <details class="nav-dropdown">
+          <summary class="nav-summary">
+            Products
+            <svg class="nav-caret" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </summary>
+          <div class="nav-dropdown__panel">
+            <a href="/products">All Products</a>
+            {productLinks.map((p) => <a href={p.href}>{p.label}</a>)}
+          </div>
+        </details>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a class="btn btn--primary" href="/contact" style="margin-top:8px">Request a Quote</a>
+      </div>
+    </details>
+  </div>
+</header>

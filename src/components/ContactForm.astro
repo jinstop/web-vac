@@ -1,0 +1,92 @@
+---
+import { site } from '../config/site';
+import { categories } from '../data/products';
+---
+
+<section class="section">
+  <div class="container contact-layout">
+    <div class="contact-form">
+      <h2 style="font-size:1.4rem;font-weight:700;margin-bottom:8px">Send an Inquiry</h2>
+      <p style="color:var(--text-muted);margin-bottom:24px">
+        Tell us your parts, load size, and cycle requirements — our engineering team will
+        propose a furnace configuration and quotation.
+      </p>
+      <form action={`mailto:${site.email}`} method="post" enctype="text/plain">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="name">Name *</label>
+            <input id="name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div class="form-field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" autocomplete="organization" />
+          </div>
+          <div class="form-field">
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="form-field">
+            <label for="country">Country / Region</label>
+            <input id="country" name="country" type="text" autocomplete="country-name" />
+          </div>
+          <div class="form-field form-field--full">
+            <label for="product">Product of Interest</label>
+            <select id="product" name="product">
+              <option value="">Select a furnace type</option>
+              {
+                categories.map((c) => (
+                  <option value={c.title}>{c.title}</option>
+                ))
+              }
+              <option value="Other / Custom">Other / Custom</option>
+            </select>
+          </div>
+          <div class="form-field form-field--full">
+            <label for="message">Requirements *</label>
+            <textarea id="message" name="message" required placeholder="Part material & dimensions, batch weight, required temperature / vacuum level, cycle time, site constraints…"></textarea>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top:22px">
+          <button class="btn btn--primary btn--lg" type="submit">Send Inquiry</button>
+        </div>
+        <p class="form-note">
+          Note: this static form opens your email client with the details pre-filled.
+          You can also write to us directly at <a href={`mailto:${site.email}`}>{site.email}</a>.
+        </p>
+      </form>
+    </div>
+
+    <aside class="contact-aside">
+      <div class="contact-card">
+        <h3>
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 7h18v12H3zM3 7l9 7 9-7" /></svg>
+          Email Us
+        </h3>
+        <p>
+          <a href={`mailto:${site.email}`}>{site.email}</a><br />
+          Typical response within one business day.
+        </p>
+      </div>
+      <div class="contact-card">
+        <h3>
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM3 10h14M10 3c2 2.2 2 9.8 0 14M10 3C8 5.2 8 12.8 10 17" /></svg>
+          Global Service
+        </h3>
+        <p>
+          Installation supervision, operator training and spare-parts support for
+          furnaces delivered worldwide.
+        </p>
+      </div>
+      <div class="contact-card">
+        <h3>
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM10 9v5M10 6.5v.01" /></svg>
+          Custom Engineering
+        </h3>
+        <p>
+          Every furnace is configured to your parts, load size and cycle — from
+          laboratory scale to full production lines.
+        </p>
+      </div>
+    </aside>
+  </div>
+</section>
