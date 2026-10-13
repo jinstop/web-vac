@@ -1,12 +1,10 @@
 ---
-// 6 大产品类别线性图标（统一风格：炉体 + 热流 + 类别符号）
 interface Props {
   name: 'quench' | 'anneal' | 'temper' | 'sinter' | 'braze' | 'carburizing';
 }
 
 const { name } = Astro.props;
 
-// 类别符号（炉体观察窗内）
 const symbols: Record<string, string> = {
   quench: 'M14.5 17.5h3M14.5 17.5l-1.6-1.6M14.5 17.5l-1.6 1.6M17.5 17.5l1.6-1.6M17.5 17.5l1.6 1.6',
   anneal: 'M13.5 19l2-3 2 2 2-4.5',
@@ -26,14 +24,9 @@ const symbols: Record<string, string> = {
   stroke-linejoin="round"
   aria-hidden="true"
 >
-  <!-- 炉体 -->
   <rect x="5" y="9" width="22" height="18" rx="2" />
-  <!-- 观察窗 -->
   <rect x="12.5" y="13.5" width="7" height="7.5" rx="1" />
-  <!-- 类别符号 -->
   <path d={symbols[name]} stroke-width="1.6" />
-  <!-- 顶部热流 -->
   <path d="M11 6.5c0-1.8 1.2-2.4 1.2-4.5M16 6.5c0-1.8 1.2-2.4 1.2-4.5M21 6.5c0-1.8 1.2-2.4 1.2-4.5" opacity="0.7" />
-  <!-- 基座 -->
   <path d="M3 27h26" />
 </svg>

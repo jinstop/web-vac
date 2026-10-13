@@ -1,5 +1,3 @@
-// 产品分类数据：6 大真空热处理炉类别
-// 规格为行业典型代表值（representative），每台炉按订单工程设计；此声明同步展示于产品页脚注。
 
 export interface SpecRow {
   label: string;
@@ -376,6 +374,5 @@ export const categories: Category[] = [
   }
 ];
 
-/** 规格代表值声明（产品页脚注） */
 export const specNote =
   'Specifications shown are representative values. Every furnace is engineered to your parts, load size, and cycle requirements — contact us for a tailored configuration.';
