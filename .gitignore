@@ -14,3 +14,6 @@ assets-library/
 
 # skill 文件（如存于项目内）
 SKILL.md
+
+# 工作区数据（WorkBuddy 本地记忆）
+.workbuddy/
