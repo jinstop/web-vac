@@ -1,13 +1,12 @@
 export const site = {
-  name: 'Qov',
-  version: 'V1.3.05',
+  name: 'VAX',
+  version: 'V1.3.06',
   tagline: 'Vacuum Furnace Manufacturer',
-  domain: 'https://vac.mokc.top',
+  domain: 'https://vax.levuzo.com',
   slogan: 'Precision Vacuum Thermal Processing Solutions',
-  /** placeholder email (domain-derived), to be replaced after user confirmation */
-  email: 'sales@vac.mokc.top',
+  email: 'vax@levuzo.com',
   description:
-    'Qov manufactures industrial vacuum heat treatment furnaces: vacuum quenching (gas & oil), annealing, tempering, sintering, brazing, and carburizing/nitriding furnaces, engineered to order and delivered worldwide.'
+    'VAX manufactures industrial vacuum heat treatment furnaces: vacuum quenching (gas & oil), annealing, tempering, sintering, brazing, and carburizing/nitriding furnaces, engineered to order and delivered worldwide.'
 };
 
 export const nav = [
