@@ -1,0 +1,154 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTASection from '../../components/CTASection.astro';
+import { site } from '../../config/site';
+import { articles } from '../../data/blog';
+
+export function getStaticPaths() {
+  return articles.map((a) => ({ params: { slug: a.slug }, props: { article: a } }));
+}
+
+interface Props {
+  article: (typeof articles)[number];
+}
+
+const { article: a } = Astro.props;
+
+const title = `${a.title} | ${site.name}`;
+const description = a.excerpt;
+
+function formatDate(iso: string) {
+  return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Base title={title} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <a href="/blog">Blog</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>{a.category}</span>
+      </nav>
+      <span class="post-cat">{a.category}</span>
+      <h1>{a.title}</h1>
+      <div class="post-meta">
+        <time datetime={a.date}>{formatDate(a.date)}</time>
+        <span class="post-meta__dot">·</span>
+        <span>{a.readTime}</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container article">
+      {a.content.map((block) => {
+        if (block.type === 'h2') return <h2>{block.text}</h2>;
+        if (block.type === 'list')
+          return (
+            <ul>
+              {block.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          );
+        return <p>{block.text}</p>;
+      })}
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <CTASection
+        title="Put This Into Practice"
+        text="Talk to our engineering team about your parts, materials and cycle — we will recommend the right vacuum furnace configuration."
+      />
+      <a class="back-link" href="/blog">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M20 12H4M10 18l-6-6 6-6" />
+        </svg>
+        Back to all articles
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .post-cat {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-400);
+    margin-bottom: 12px;
+  }
+  .post-meta {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: var(--text-on-dark-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .post-meta__dot {
+    color: var(--steel-500);
+  }
+  .article {
+    max-width: 760px;
+  }
+  .article p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .article h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 40px 0 16px;
+    color: var(--text);
+  }
+  .article ul {
+    margin: 0 0 20px;
+    padding-left: 22px;
+  }
+  .article li {
+    position: relative;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 12px;
+    padding-left: 6px;
+  }
+  .article li::before {
+    content: '';
+    position: absolute;
+    left: -14px;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-500);
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-600);
+  }
+  .back-link:hover {
+    color: var(--accent-600);
+  }
+</style>

@@ -1,0 +1,158 @@
+---
+import Base from '../layouts/Base.astro';
+import CTASection from '../components/CTASection.astro';
+import { site } from '../config/site';
+import { articles } from '../data/blog';
+
+const title = `Blog | ${site.name}`;
+const description =
+  'Engineering notes on vacuum heat treatment: case-hardening, quenching, brazing, sintering and annealing — how the processes work, and how to choose the right furnace.';
+
+function formatDate(iso: string) {
+  return new Date(iso + 'T00:00:00').toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Base title={title} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>Blog</span>
+      </nav>
+      <h1>Engineering Blog</h1>
+      <p class="page-hero__sub">
+        Straightforward, engineering-level explanations of vacuum heat-treatment processes and
+        furnace selection — written for the people who have to make the parts, and the decisions.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="post-grid">
+        {articles.map((a) => (
+          <article class="post-card">
+            <div class="post-card__meta">
+              <span class="post-card__cat">{a.category}</span>
+              <span class="post-card__dot">·</span>
+              <time datetime={a.date}>{formatDate(a.date)}</time>
+              <span class="post-card__dot">·</span>
+              <span>{a.readTime}</span>
+            </div>
+            <h2><a href={`/blog/${a.slug}`}>{a.title}</a></h2>
+            <p class="post-card__excerpt">{a.excerpt}</p>
+            <a class="post-card__link" href={`/blog/${a.slug}`}>
+              Read article
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                <path d="M4 12h16M14 6l6 6-6 6" />
+              </svg>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <CTASection
+        title="Questions About Your Process?"
+        text="If an article raises a question about your parts or furnace, send us the details — our engineering team will help you work through it."
+      />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  @media (max-width: 820px) {
+    .post-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 30px 28px 26px;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  }
+  .post-card:hover {
+    border-color: var(--primary-500);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+  .post-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .post-card__cat {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-600);
+    background: var(--paper-50);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 11px;
+  }
+  .post-card__dot {
+    color: var(--steel-500);
+  }
+  .post-card h2 {
+    font-size: 1.24rem;
+    font-weight: 700;
+    line-height: 1.28;
+  }
+  .post-card h2 a {
+    color: var(--text);
+  }
+  .post-card:hover h2 a {
+    color: var(--primary-600);
+  }
+  .post-card__excerpt {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+  .post-card__link {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-600);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 22px;
+  }
+  .post-card:hover .post-card__link {
+    color: var(--accent-600);
+  }
+  .post-card__link svg {
+    transition: transform 0.15s ease;
+  }
+  .post-card:hover .post-card__link svg {
+    transform: translateX(3px);
+  }
+</style>

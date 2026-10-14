@@ -1,0 +1,203 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../config/site';
+import { solutions } from '../../data/solutions';
+
+export function getStaticPaths() {
+  return solutions.map((s) => ({ params: { slug: s.slug }, props: { solution: s } }));
+}
+
+interface Props {
+  solution: (typeof solutions)[number];
+}
+
+const { solution: s } = Astro.props;
+
+const title = `${s.title} | ${site.name}`;
+const description = s.summary;
+---
+
+<Base title={title} description={description}>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="breadcrumb__sep">/</span>
+        <a href="/solutions">Solutions</a>
+        <span class="breadcrumb__sep">/</span>
+        <span>{s.industry}</span>
+      </nav>
+      <span class="case-tag">{s.industry}</span>
+      <h1>{s.title}</h1>
+      <p class="page-hero__sub">{s.client}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container case-layout">
+      <div class="case-body">
+        <span class="eyebrow">The Challenge</span>
+        <div class="prose">
+          {s.challenge.map((p) => <p>{p}</p>)}
+        </div>
+
+        <span class="eyebrow" style="margin-top:36px">The VAX Solution</span>
+        <div class="prose">
+          {s.solution.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+
+      <aside class="case-aside">
+        <div class="case-panel">
+          <span class="case-panel__label">Furnace Configuration</span>
+          <h3>{s.furnaceModel}</h3>
+          <ul class="check-list check-list--stack">
+            {s.furnaceHighlights.map((h) => (
+              <li>
+                <Icon name="check" />
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+          <a class="case-panel__link" href={`/products/${s.relatedSlug}`}>
+            Explore this furnace
+            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <path d="M4 12h16M14 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="case-panel case-panel--results">
+          <span class="case-panel__label">Results</span>
+          <dl class="stat-grid">
+            {s.results.map((r) => (
+              <div class="stat-grid__item">
+                <dt>{r.metric}</dt>
+                <dd>{r.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <CTASection
+        title="Want This Outcome on Your Line?"
+        text="Send us your parts, materials and the defect or cost you want to remove — we will come back with a configuration and the expected result."
+      />
+      <a class="back-link" href="/solutions">
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M20 12H4M10 18l-6-6 6-6" />
+        </svg>
+        All solutions &amp; case studies
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .case-tag {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-400);
+    margin-bottom: 12px;
+  }
+  .case-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 0.9fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .case-layout {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+  .case-body .eyebrow {
+    display: block;
+  }
+  .case-aside {
+    display: grid;
+    gap: 20px;
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
+  }
+  .case-panel {
+    background: var(--paper-50);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 26px 24px;
+  }
+  .case-panel__label {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steel-500);
+    margin-bottom: 12px;
+  }
+  .case-panel h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .check-list--stack {
+    grid-template-columns: 1fr;
+  }
+  .case-panel__link {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-600);
+  }
+  .case-panel__link:hover {
+    color: var(--accent-600);
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 16px;
+  }
+  .stat-grid__item dt {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary-600);
+    line-height: 1.1;
+  }
+  .stat-grid__item dd {
+    margin-top: 4px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-600);
+  }
+  .back-link:hover {
+    color: var(--accent-600);
+  }
+</style>

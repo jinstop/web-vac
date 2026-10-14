@@ -1,6 +1,6 @@
 export const site = {
   name: 'VAX',
-  version: 'V1.3.06',
+  version: 'V1.4.00',
   tagline: 'Vacuum Furnace Manufacturer',
   domain: 'https://vax.levuzo.com',
   slogan: 'Precision Vacuum Thermal Processing Solutions',
@@ -12,6 +12,8 @@ export const site = {
 export const nav = [
   { label: 'Home', href: '/' },
   { label: 'Products', href: '/products' },
+  { label: 'Solutions', href: '/solutions' },
+  { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' }
 ];
