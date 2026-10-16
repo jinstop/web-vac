@@ -36,11 +36,13 @@ const description =
       <ul>
         <li>
           <strong>Inquiry form.</strong> When you submit the contact form, the
-          details you enter (name, company, email, country, product of interest,
+          details you enter (name, company, email, product of interest,
           requirements) are transmitted through the FormSubmit service and
-          forwarded to our sales mailbox. We use this data only to answer your
-          inquiry and prepare a quotation. Legal basis: pre-contractual steps
-          and your consent at submission.
+          forwarded to our sales mailbox, together with the technical details
+          of your submission — date and time, the page you submitted from, your
+          IP address and your browser/user-agent string. We use this data only
+          to answer your inquiry and prepare a quotation. Legal basis:
+          pre-contractual steps and your consent at submission.
         </li>
         <li>
           <strong>Consent preference.</strong> Your cookie choice is stored in
@@ -100,6 +102,11 @@ const description =
           <strong>FormSubmit (formsubmit.co)</strong> processes the inquiry form
           and forwards it to our email address. Its handling of the one-time
           submission is governed by the FormSubmit privacy policy.
+        </li>
+        <li>
+          <strong>ipify (api.ipify.org)</strong> is queried once when you submit
+          the contact form, so the inquiry email records the IP address it was
+          sent from. Only the IP address is exchanged.
         </li>
         <li>
           <strong>Google Fonts</strong> serves the web fonts used for typography.
