@@ -1,7 +1,8 @@
 ---
 // GDPR cookie consent banner.
-// The site sets no tracking cookies today; the banner documents consent
-// state and gates any future non-essential storage via window.vaxCookieConsent.
+// The site sets no non-essential storage until the visitor accepts: Google
+// Analytics 4 runs under Google Consent Mode v2 with storage denied by
+// default, and this banner flips it to granted on accept (see applyGtagConsent).
 ---
 
 <div id="cookie-consent" class="cc" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
@@ -9,9 +10,9 @@
     <div class="cc__text">
       <strong>We use minimal cookies</strong>
       <p>
-        This site does not use advertising or tracking cookies. We store your
-        consent choice in local storage, and any optional features (such as
-        embedded content) will only load after you accept. See our
+        This site uses Google Analytics to understand how visitors use it.
+        Analytics cookies are only set if you accept — otherwise just your
+        consent choice is stored in local storage. See our
         <a href="/privacy">Privacy &amp; Cookie Policy</a>.
       </p>
     </div>
@@ -90,12 +91,27 @@
 
   const banner = document.getElementById('cookie-consent');
 
+  // Tells Google Analytics (Consent Mode v2) whether storage is allowed.
+  // gtag() is defined in Base.astro; calls made before gtag.js finishes
+  // loading are queued on dataLayer and applied once it is ready.
+  function applyGtagConsent(granted: boolean) {
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', {
+        ad_storage: granted ? 'granted' : 'denied',
+        ad_user_data: granted ? 'granted' : 'denied',
+        ad_personalization: granted ? 'granted' : 'denied',
+        analytics_storage: granted ? 'granted' : 'denied'
+      });
+    }
+  }
+
   function setConsent(value: 'granted' | 'denied') {
     try {
       localStorage.setItem(STORAGE_KEY, value);
     } catch {
       /* storage unavailable (private mode) - banner will reappear next visit */
     }
+    applyGtagConsent(value === 'granted');
     if (banner) banner.hidden = true;
   }
 
@@ -107,6 +123,8 @@
       stored = null;
     }
     if (!stored) banner.hidden = false;
+    // Re-apply a previously granted choice so returning visitors keep analytics.
+    if (stored === 'granted') applyGtagConsent(true);
 
     document.getElementById('cc-accept')?.addEventListener('click', () => setConsent('granted'));
     document.getElementById('cc-decline')?.addEventListener('click', () => setConsent('denied'));

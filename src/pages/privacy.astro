@@ -49,9 +49,11 @@ const description =
           and honour your consent, and it never leaves your device.
         </li>
         <li>
-          <strong>No analytics, no advertising, no tracking.</strong> This site
-          sets no advertising or analytics cookies and does not profile
-          visitors.
+          <strong>Analytics (only with your consent).</strong> If you accept
+          in the cookie banner, we load Google Analytics 4 to measure how this
+          website is used — pages visited, session duration, general region and
+          device type. It sets the cookies listed in section 3. If you decline,
+          no analytics cookies are set at all. Legal basis: your consent.
         </li>
       </ul>
 
@@ -72,12 +74,24 @@ const description =
             <td>Remembers your cookie consent decision</td>
             <td>No</td>
           </tr>
+          <tr>
+            <td><code>_ga</code> (cookie)</td>
+            <td>Analytics</td>
+            <td>Distinguishes unique visitors (Google Analytics 4)</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td><code>_ga_&lt;container-id&gt;</code> (cookie)</td>
+            <td>Analytics</td>
+            <td>Maintains session state (Google Analytics 4)</td>
+            <td>Yes</td>
+          </tr>
         </tbody>
       </table>
       <p>
-        Optional (non-essential) storage is not used today. If we ever add
-        features that require it — for example analytics or embedded videos —
-        they will stay disabled until you accept in the cookie banner.
+        Analytics cookies are optional and stay disabled until you accept in
+        the cookie banner. If we add further features that require storage —
+        for example embedded videos — they will follow the same rule.
       </p>
 
       <h2>4. Third parties</h2>
@@ -90,6 +104,11 @@ const description =
         <li>
           <strong>Google Fonts</strong> serves the web fonts used for typography.
           Requests to Google's servers may expose your IP address to Google.
+        </li>
+        <li>
+          <strong>Google Analytics</strong> (loaded only after you accept in
+          the cookie banner) measures website usage. Its handling of data is
+          governed by the Google Privacy Policy.
         </li>
         <li>
           <strong>Cloudflare</strong> delivers this website and may process

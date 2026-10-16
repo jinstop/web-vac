@@ -1,6 +1,6 @@
 export const site = {
   name: 'VAX',
-  version: 'V1.4.00',
+  version: 'V1.4.01',
   tagline: 'Vacuum Furnace Manufacturer',
   domain: 'https://vax.levuzo.com',
   slogan: 'Precision Vacuum Thermal Processing Solutions',
